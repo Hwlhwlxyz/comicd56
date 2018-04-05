@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>comicview2</title>
+</head>
+
+
+
+
+
+<body>
+
+
+
+
+    <div id="div" style="z-index: 1; width:100%;">
+        <img src="{% url 'comicpage' comicname volname pagenumber %}" style="width:100%;"/>
+    </div>
+
+    <div style="z-index: 2; position: fixed;height: 10%;width: 100%;top: 0px;left: 0px;">
+        <button style="height: 100%;width: 100%;opacity: 0;" onclick="window.location.href='{% url 'comicinfo' comicname %}'"></button>
+    </div>
+
+    <div style="z-index: 3; position: fixed;height: 100%;width: 10%;top: 0px;left: 0px;">
+        <button style="height: 100%;width: 100%;opacity: 0;" onclick="window.location.href='{% url 'comicview' comicname volname prevpagenumber %}'"></button>
+    </div>
+
+    <div style="z-index: 3; position: fixed;height: 100%;width: 10%;top: 0px;right: 0px;">
+        <button style="height: 100%;width: 100%;opacity: 0;" onclick="window.location.href='{% url 'comicview' comicname volname nextpagenumber %}'"></button>
+    </div>
+
+    <div style="z-index: 3; position: fixed;height: 10%;width: 100%;bottom: 0px;left: 0px;">
+        <button style="height: 100%;width: 100%;opacity: 0;" onclick="window.location.href='#BOTTOM'"></button>
+    </div>
+
+    <div style="z-index: 4; position: fixed;height: 10%;width: 100%;bottom: 0px;left: 0px;">
+        <button id="btn" style="height: 100%;width: 100%;opacity: 0;"></button>
+    </div>
+
+    <a name="BOTTOM"></a>
+
+
+
+
+<script>
+    var btn = document.getElementById("btn");
+    var dv = document.getElementById("div");
+    var dvT = dv.scrollTop;
+    var outerHeight = window.outerHeight
+    var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+    var step = windowHeight;
+    var step = outerHeight / Math.ceil(outerHeight / windowHeight)
+
+    function click_fn() {
+    dvT += step;
+    window.scrollTo(0,dvT);
+}
+
+
+/*****/
+btn.onmousedown = function(){
+  };
+
+btn.onmouseup = function(){
+    click_fn();
+  };
+
+</script>
+
+
+
+</body>
+</html>
